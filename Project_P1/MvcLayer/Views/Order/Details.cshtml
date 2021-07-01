@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ModelsLibrary.OrderItem>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Order @Html.DisplayFor(model => model.First().OrderId)</h1>
+
+<table class="table">
+    <thead>
+        @*<script>
+            sum = Int32.Parse(Html.DisplayFor(modelItem => item.Product.Price))
+        </script>*@
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductDesc)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.tp)
+                @*@{
+            (Int64.Parse(Html.DisplayFor(modelItem => item.Product.Price).ToString()) * Int64.Parse(Html.DisplayFor(modelItem => item.OrderQuantity).ToString())).ToString();
+        }*@
+
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

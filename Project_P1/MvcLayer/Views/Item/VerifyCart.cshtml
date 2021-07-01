@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ModelsLibrary.ViewModels.ItemViewModel>
+
+@{
+    ViewData["Title"] = "VerifyCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Confirm your purchase</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Product Description
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderQuantity)
+                </td>
+            </tr>
+        }
+        <a asp-action="CreateNewOrder" asp-route-id="">Confirm Purchase</a>
+    </tbody>
+</table>

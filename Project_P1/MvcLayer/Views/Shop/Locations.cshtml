@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ModelsLibrary.Store>
+
+@{
+    ViewData["Title"] = "Locations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Choose the location nearest to you</h1>
+
+<p>
+    <a asp-controller="Order" asp-action="Orders" asp-route-id="@ViewData["CustomerId"]">Your Order History </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreStreet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreZip)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreZip)
+            </td>
+            <td>
+                @{
+                    var parms = new Dictionary<string, string>
+                    {
+                    { "CustomerId", ViewData["CustomerId"].ToString() },
+                    {"StoreId", item.StoreId.ToString() }
+                    };
+                }
+                <a asp-controller="Item" asp-action="CreateCart" asp-all-route-data="parms">Choose Store</a> |
+                <a asp-controller="Order" asp-action="StoreHistory" asp-route-id="@item.StoreId">Order History</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
